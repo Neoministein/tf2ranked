@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>TF-Ranked</title>
+</h:head>
+<h:body>
+    <f:view>
+        <h:form>
+            <h:outputLabel for="name" value="Playername:"/>
+            <h:inputText id="name" size="30" maxlength="50" required="true" value="#{playerController.player.name}"/>
+            <h:outputLabel for="rank" value="Elo Rank:"/>
+            <h:inputText id="rank" required="true" value="#{playerController.player.rank}"/>
+            <p:commandButton
+                    value="Submit"
+                    id="btnCreate"
+                    process="@form"
+                    update="@all"
+                    action="#{playerController.savePlayer}"/>
+        </h:form>
+
+        <p:dataTable id="itemTable" var="player" value="#{playerController.playerList}" rowKey="#{player.id}" selectionMode="single">
+            <p:column headerText="ID">
+                <h:outputText value="#{player.id}" />
+            </p:column>
+            <p:column headerText="Name">
+                <h:outputText value="#{player.name}" />
+            </p:column>
+            <p:column headerText="Rank">
+                <h:outputText value="#{player.rank}" />
+            </p:column>
+        </p:dataTable>
+    </f:view>
+
+    <h:outputText value="#{playerController.dataBaseVerson}"/>
+</h:body>
+</html>
